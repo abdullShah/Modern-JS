@@ -1,36 +1,57 @@
 module.exports = function (array) {  
     // вспомогательный код 
     
-    let arr = array;
     let newArr = [];
-    for (let item = 0; item < arr.length; item++) {
-        if (!(newArr.includes(arr[item]))) newArr.push(arr[item])
+    for (let item = 0; item < array.length; item++) {
+        if (!(newArr.includes(array[item]))) newArr.push(array[item])
     }
 
     let setObject = {
-        set: newArr,
-
-        add (item) {
-            newArr.push(item);
+        add (item){
+            if( !newArr.includes(item) ) {
+                newArr.push(item);
+            }
+            return this
         },
 
-        delete (item) {
-            arr.splice(arr.indexOf(item), 1);
+        delete(elem){
+            for ( let i = 0; i <= newArr.length; i++){
+            
+                //проверка на NaN
+                if ( (elem === elem) === false ){
+                    if ( (newArr[i] === newArr[i]) === false ){
+                        newArr.splice(i, 1)
+                        return true
+                    }
+                }
+
+                //обычная проверка
+                else if ( newArr.includes(elem) ){
+                    let elemArrNum = newArr.indexOf(elem)
+                    newArr.splice(elemArrNum, 1)
+                    return true
+                }
+        
+                else {
+                    return false
+                }
+            }
         },
 
         has (item) {
-            return newArr.includes(item);
+            return newArr.includes(item)
         }, 
         
         clear () {
             newArr = [];
-        }
+            return true
+        },
+
+        get size() {
+            return newArr.length;
+        },
     }
     
     // реализация
     return setObject
 }
-
-
-
-
